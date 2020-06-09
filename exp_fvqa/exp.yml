@@ -1,0 +1,106 @@
+# Dataset reader arguments
+dataset:
+  all_qa_path: "fvqa/exp_data/data/all_qs_dict_release.json"
+  all_qa_rel_path: "fvqa/exp_data/data/all_qs_rel_dict_release.json"
+  all_facts_path: "fvqa/exp_data/data/all_fact_triples_release.json"
+  all_facts_embed_path: "fvqa/exp_data/data/all_fact_embed.pickle"
+  all_facts_list_path: "fvqa/exp_data/data/all_fact_list2.json"
+  all_image_qid_path: "fvqa/exp_data/data/all_image_qid.json"
+
+  all_questions_path: "fvqa/exp_data/data/all_questions.txt"
+  all_answers_path: "fvqa/exp_data/data/all_answers.txt"
+
+  image_features_path: "fvqa/exp_data/data/36bbox_res.pickle"
+  image_captions_path: "fvqa/exp_data/data/captions.json"
+
+  word2id_path: "fvqa/exp_data/data/word2id_question.json"
+  id2word_path: "fvqa/exp_data/data/id2word_question.json"
+  glove_vec_path: "fvqa/exp_data/data/glove_300d_questions.npy"
+  bert_que_embed_path: "fvqa/exp_data/data/bert_question_1024_mask_zero.npy"
+  bert_que_token_embed_path: "fvqa/exp_data/data/bert_que_word.npy"
+
+  max_sequence_lengtn: 23
+
+  img_norm: 1
+
+  test:
+    test_qids: "fvqa/exp_data/data/test0/test_qids.json"
+    test_questions: "fvqa/exp_data/data/test0/test_questions.json"
+    test_answers: "fvqa/exp_data/data/test0/test_answers.json"
+    test_gt_facts: "fvqa/exp_data/data/test0/test_gt_facts.json"
+    test_facts: "fvqa/exp_data/data/test0/test_facts.json"
+
+    test_top_facts: "fvqa/exp_data/data/test0/test_top_facts.json"
+    test_captions: "fvqa/exp_data/data/test0/test_captions.json"
+    test_features: "fvqa/exp_data/data/test0/test_features.npy"
+    test_labels: "fvqa/exp_data/data/test0/test_labels.json"
+    test_bboxes: "fvqa/exp_data/data/test0/test_bboxes.npy"
+    test_facts_graph: "fvqa/exp_data/data/test0/facts.pickle"
+    test_whs: "fvqa/exp_data/data/test0/test_whs.json"
+
+    test_top100_facts_graph: "fvqa/exp_data/data/test0/facts_top100.pickle"
+    test_semantic_graph: "fvqa/exp_data/data/test0/test_semantic_graph.pickle"
+
+  train:
+    train_qids: "fvqa/exp_data/data/train0/train_qids.json"
+    train_questions: "fvqa/exp_data/data/train0/train_questions.json"
+    train_answers: "fvqa/exp_data/data/train0/train_answers.json"
+    train_gt_facts: "fvqa/exp_data/data/train0/train_gt_facts.json"
+    train_facts: "fvqa/exp_data/data/train0/train_facts.json"
+
+    train_top_facts: "fvqa/exp_data/data/train0/train_top_facts.json"
+    train_captions: "fvqa/exp_data/data/train0/train_captions.json"
+    train_features: "fvqa/exp_data/data/train0/train_features.npy"
+    train_labels: "fvqa/exp_data/data/train0/train_labels.json"
+    train_whs: "fvqa/exp_data/data/train0/train_whs.json"
+    train_bboxes: "fvqa/exp_data/data/train0/train_bboxes.npy"
+    train_facts_graph: "fvqa/exp_data/data/train0/facts.pickle"
+
+    train_top100_facts_graph: "fvqa/exp_data/data/train0/facts_top100.pickle"
+    train_semantic_graph: "fvqa/exp_data/data/train0/train_semantic_graph.pickle"
+
+# Model related arguments
+model:
+  img_feature_size: 2048
+  word_embedding_size: 300
+  lstm_hidden_size: 512
+  lstm_num_layers: 2
+  dropout: 0.5
+
+  glove_embedding_size: 300
+
+  #question 2 node attention
+  node_att_ques_img_proj_dims: 300
+
+  #question 2 relation attention
+  relation_dims: 7
+  rel_att_ques_rel_proj_dims: 128
+
+  # image_gcn1
+  image_gcn1_out_dim: 1024
+
+  # fact gcn1
+  fact_gcn1_feature_dim: 1024
+  fact_gcn1_att_proj_dim: 512
+  fact_gcn1_out_dim: 128
+
+  # image_gcn2
+  image_gcn2_out_dim: 512
+
+  # fact_gcn2
+  fact_gcn2_att_proj_dim: 100
+  fact_gcn2_out_dim: 1
+
+# Optimization related arguments
+solver:
+  batch_size: 64
+  num_epochs: 50
+  initial_lr: 0.001
+  lr_gamma: 0.7
+  lr_milestones:
+    - 5
+    - 7
+    - 10
+  warmup_factor: 0.2
+  warmup_epochs: 2
+  eta_min: 0.00034
